@@ -17,7 +17,6 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <ScrollToTop />
         <Header />
         <Switch>
           <Route exact path="/" component={Home}></Route>
@@ -29,6 +28,8 @@ function App() {
           <Route exact path="/Cart" component={Cart}></Route>
           <Route path="/SingleProduct/:id" component={SingleProduct}></Route>
         </Switch>
+        <ScrollToTop />
+
         <Footer />
       </Router>
     </div>

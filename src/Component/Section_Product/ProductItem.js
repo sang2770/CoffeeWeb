@@ -1,6 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-function ProductItem({ item, method, currentItem }) {
+function ProductItem({ item, method, currentItem, checkInCart }) {
+  const handlecheck = () => {
+    console.log(item.id);
+    if (checkInCart(item.id)) {
+      alert("Products are now available in the cart!");
+    } else {
+      method(item.id);
+
+      alert("Products that have been successfully added to the cart!");
+    }
+    // console.log(checkInCart(item.id));
+  };
   return (
     <div className="Product_item">
       <div className="Product_item_Img">
@@ -18,7 +29,7 @@ function ProductItem({ item, method, currentItem }) {
       <button
         className="btn Product_item_btn"
         onClick={() => {
-          method(item.id);
+          handlecheck();
         }}>
         Add to Cart
       </button>

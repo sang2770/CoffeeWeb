@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ProductItem from "./ProductItem";
-function ListProduct({ product, method, currentItem }) {
+function ListProduct({ product, method, currentItem, checkInCart }) {
   const [Type, setType] = useState("Main_Dish");
   const [number, setnumber] = useState(3);
   return (
@@ -55,6 +55,7 @@ function ListProduct({ product, method, currentItem }) {
                   item={item}
                   method={method}
                   currentItem={currentItem}
+                  checkInCart={checkInCart}
                 />
               );
             })}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import {
   RemoveFromCart,
@@ -8,6 +8,8 @@ import {
 import CartItem from "./CartItem";
 function CartList({ Cart, RemoveCart, ResetCart, Qty }) {
   const [Total, setTotal] = useState(0);
+  const [SubTotal, setSubTotal] = useState(0);
+  const Discount = useRef(3);
   useEffect(() => {
     let count = 0;
     console.log(typeof count);
@@ -16,41 +18,46 @@ function CartList({ Cart, RemoveCart, ResetCart, Qty }) {
       const a = (item.Price * item.qty).toFixed(2);
       count = count + Number(a);
     });
-
-    setTotal(count);
+    console.log(count);
+    setSubTotal(Number(count.toFixed(2)));
+    setTotal(Number(count.toFixed(2)) + Discount.current);
+    console.log(typeof SubTotal);
+    console.log(typeof Total);
   }, [Cart]);
   return (
     <div className="CartList">
       <div className="CartList_container ">
-        <table className="CartList_table" cellSpacing="0" cellPadding="0">
-          <thead>
-            <tr>
-              <th colSpan={3}> Product</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Cart.map((item, index) => {
-              return (
-                <CartItem
-                  item={item}
-                  key={index}
-                  RemoveCart={RemoveCart}
-                  Qty={Qty}
-                />
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="CartList_table_container">
+          <table className="CartList_table" cellSpacing="0" cellPadding="0">
+            <thead>
+              <tr>
+                <th colSpan={3}> Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Cart.map((item, index) => {
+                return (
+                  <CartItem
+                    item={item}
+                    key={index}
+                    RemoveCart={RemoveCart}
+                    Qty={Qty}
+                  />
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
         <div className="CartList_total">
           <div className="CartList_total_container">
             <div className="CartList_total_title">CART TOTALS</div>
             <div className="CartList_total_List">
               <div className="CartList_total_subtotal">
                 <h2>Subtotal:</h2>
-                <h3>$</h3>
+                <h3>${SubTotal}</h3>
               </div>
               <div className="CartList_total_Delivery">
                 <h2>Delivery:</h2>

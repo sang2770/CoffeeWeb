@@ -9,9 +9,19 @@ function SectionProduct({
   content,
   type,
   product,
+  cart,
   addToCart,
   currentItem,
 }) {
+  function checkInCart(id) {
+    console.log(cart);
+    console.log(id);
+    for (const item of cart) {
+      if (item.id === id) return true;
+    }
+    return false;
+    // console.log(id);
+  }
   return (
     <div className="SectionProduct">
       <SectionHeader title={title} content={content} />
@@ -20,12 +30,14 @@ function SectionProduct({
           product={product}
           method={addToCart}
           currentItem={currentItem}
+          checkInCart={checkInCart}
         />
       ) : (
         <ListProduct
           product={product}
           method={addToCart}
           currentItem={currentItem}
+          checkInCart={checkInCart}
         />
       )}
     </div>
@@ -34,6 +46,7 @@ function SectionProduct({
 const mapStateToProps = (state) => {
   return {
     product: state.products.product,
+    cart: state.products.cart,
   };
 };
 const mapDispatchToProps = (dispatch) => {

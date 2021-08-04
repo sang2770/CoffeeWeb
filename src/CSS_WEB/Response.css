@@ -167,6 +167,9 @@
     .MenuItem {
         justify-content: space-between;
     }
+    .CartList_total {
+        width: 100%;
+    }
 }
 
 @media (max-width: 46.1875em) {}

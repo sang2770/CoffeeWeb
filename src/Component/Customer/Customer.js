@@ -10,9 +10,11 @@ function Customer() {
     return () => {
       console.log("Destroy ok");
       window.removeEventListener("scroll", handle, true);
+      console.log("Destroy last");
     };
   }, []);
   const handle = function () {
+    console.log("chua xoa");
     const value = Bg_1.current.offsetTop;
     if (window.scrollY > value - 600) {
       console.log("Hight");
